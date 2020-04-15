@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker-compose up --detach
+
+docker exec -it backend /bin/bash
