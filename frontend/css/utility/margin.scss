@@ -1,0 +1,56 @@
+@mixin mx-mixin($val, $i) {
+ .mx-#{$i} {
+    margin-left: $val;
+    margin-right: $val;
+  }
+}
+
+@mixin my-mixin($val, $i) {
+  .my-#{$i} {
+    margin-top: $val;
+    margin-bottom: $val;
+  }
+}
+
+@mixin mt-mixin($val, $i) {
+  .mt-#{$i} {
+    margin-top: $val;
+    margin-top: $val;
+  }
+}
+
+@mixin mr-mixin($val, $i) {
+  .mr-#{$i} {
+    margin-right: $val;
+    margin-right: $val;
+  }
+}
+
+@mixin mb-mixin($val, $i) {
+  .mb-#{$i} {
+    margin-bottom: $val;
+    margin-bottom: $val;
+  }
+}
+
+@mixin ml-mixin($val, $i) {
+  .ml-#{$i} {
+    margin-left: $val;
+    margin-left: $val;
+  }
+}
+
+
+@for $i from 1 through 6 {
+  $num: ($i * 0.5) + rem;
+
+  @include mx-mixin($num, $i);
+  @include my-mixin($num, $i);
+  @include mt-mixin($num, $i);
+  @include mr-mixin($num, $i);
+  @include ml-mixin($num, $i);
+  @include mb-mixin($num, $i);
+}
+
+@include mx-mixin(auto, auto);
+@include my-mixin(auto, auto);

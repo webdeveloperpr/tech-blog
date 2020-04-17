@@ -1,0 +1,21 @@
+$dark-blue: #131217;
+$white: #fff;
+
+html {
+  font-family: Hind;
+}
+
+body {
+  background-color: $dark-blue;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  color: $white;
+}

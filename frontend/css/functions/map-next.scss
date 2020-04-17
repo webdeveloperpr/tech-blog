@@ -1,0 +1,13 @@
+@function map-next($map, $key) {
+  $next-key: null;
+  $found: false;
+  @each $k, $v in $map {
+    @if ($found == true) {
+      $next-key: $k;
+    }
+    @if $key == $k {
+      $found: true;
+    }
+  }
+  @return $next-key;
+}

@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  height: inherit;
+}
+
+main {
+  max-width: 100%;
+  @include media-breakpoint-up(sm) {
+    max-width: map-get($breakpoints, sm) + px;
+  }
+  @include media-breakpoint-up(md) {
+    max-width: map-get($breakpoints, md) + px;
+  }
+  @include media-breakpoint-up(lg) {
+    max-width: map-get($breakpoints, lg) + px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: map-get($breakpoints, xl) + px;
+  }
+
+  @extend .mx-auto;
+}

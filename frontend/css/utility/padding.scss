@@ -1,0 +1,54 @@
+@mixin px-mixin($val, $i) {
+  .px-#{$i} {
+    padding-left: $val;
+    padding-right: $val;
+  }
+}
+
+@mixin py-mixin($val, $i) {
+  .py-#{$i} {
+    padding-top: $val;
+    padding-bottom: $val;
+  }
+}
+
+@mixin pt-mixin($val, $i) {
+  .pt-#{$i} {
+    padding-top: $val;
+    padding-top: $val;
+  }
+}
+
+@mixin pr-mixin($val, $i) {
+  .pr-#{$i} {
+    padding-right: $val;
+    padding-right: $val;
+  }
+}
+
+@mixin pb-mixin($val, $i) {
+  .pb-#{$i} {
+    padding-bottom: $val;
+    padding-bottom: $val;
+  }
+}
+
+@mixin pl-mixin($val, $i) {
+  .pl-#{$i} {
+    padding-left: $val;
+    padding-left: $val;
+  }
+}
+
+@for $i from 1 through 6 {
+   $num: ($i * 0.5) + rem;
+ 
+  @include px-mixin($num, $i);
+  @include py-mixin($num, $i);
+  @include pt-mixin($num, $i);
+  @include pr-mixin($num, $i);
+  @include pl-mixin($num, $i);
+  @include pb-mixin($num, $i);
+}
+  @include px-mixin(auto, auto);
+  @include py-mixin(auto, auto);

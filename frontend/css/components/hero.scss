@@ -1,0 +1,25 @@
+.hero-card-component__area-1 {
+  grid-area: image;
+}
+
+.hero-card-component__area-2 {
+  grid-area: text;
+}
+
+.hero-card-component {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  width: 100%;
+  grid-template-areas:
+    "image"
+    "text";
+}
+
+@include media-breakpoint-up(md) {
+  .hero-card-component {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "image text";
+  }
+}

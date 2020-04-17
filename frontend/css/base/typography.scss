@@ -1,0 +1,70 @@
+@mixin font-size($font-size, $line-height) {
+  $lh: (floor($font-size) + $line-height) + rem;
+  $padding: $line-height * 0.4;
+
+  margin-top: -$padding + rem;
+  font-size: $font-size + rem;
+  line-height: $lh;
+  margin-bottom: 1rem + $padding;
+}
+
+@mixin create-font-sizes($base, $scale) {
+  h1,
+  .h1 {
+    @include font-size($base + ($scale * 7), 1);
+  }
+
+  h2,
+  .h2 {
+    @include font-size($base + ($scale * 6), 1);
+  }
+
+  h3,
+  .h3 {
+    @include font-size($base + ($scale * 5), 1);
+  }
+
+  h4,
+  .h4 {
+    @include font-size($base + ($scale * 4), 1);
+  }
+
+  h5,
+  .h5 {
+    @include font-size($base + ($scale * 3), 1);
+  }
+
+  h6,
+  .h6 {
+    @include font-size($base + ($scale * 2), 1);
+  }
+
+  p,
+  .p {
+    @include font-size(1, 1);
+  }
+
+  span,
+  .span {
+    @include font-size(1, 1);
+  }
+
+  a,
+  .link {
+    @include font-size(1, 1);
+  }
+}
+
+@include create-font-sizes(1, 0.175);
+
+@include media-breakpoint-up(md) {
+  @include create-font-sizes(1, 0.2);
+}
+
+@include media-breakpoint-up(lg) {
+  @include create-font-sizes(1, 0.25);
+}
+
+@include media-breakpoint-up(xl) {
+  @include create-font-sizes(1, 0.275);
+}
