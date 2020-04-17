@@ -1,6 +1,6 @@
 @mixin font-size($font-size, $line-height) {
   $lh: (floor($font-size) + $line-height) + rem;
-  $padding: $line-height * 0.4;
+  $padding: $line-height * 0.1;
 
   margin-top: -$padding + rem;
   font-size: $font-size + rem;
@@ -41,7 +41,7 @@
 
   p,
   .p {
-    @include font-size(1, 1);
+    @include font-size(1, 0.5);
   }
 
   span,
@@ -55,16 +55,16 @@
   }
 }
 
-@include create-font-sizes(1, 0.175);
+@include create-font-sizes(1, 0.03);
 
 @include media-breakpoint-up(md) {
-  @include create-font-sizes(1, 0.2);
+  @include create-font-sizes(1, 0.05);
 }
 
 @include media-breakpoint-up(lg) {
-  @include create-font-sizes(1, 0.25);
+  @include create-font-sizes(1, 0.10);
 }
 
 @include media-breakpoint-up(xl) {
-  @include create-font-sizes(1, 0.275);
+  @include create-font-sizes(1, 0.16);
 }

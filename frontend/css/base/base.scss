@@ -13,6 +13,7 @@ body {
 
 main {
   max-width: 100%;
+  @extend .px-2, .px-2;
   @include media-breakpoint-up(sm) {
     max-width: map-get($breakpoints, sm) + px;
   }

@@ -1,7 +1,7 @@
 
 const Hero = () => {
   return (
-    <div className="px-2 py-2 hero-card-component">
+    <div className="mb-4 hero-card-component">
       <div className="hero-card-component__area-1">
         <img
           className="img-responsive"
@@ -11,7 +11,7 @@ const Hero = () => {
       <div className="hero-card-component__area-2">
         <h2>
           How to Install TeamViewer on Debian 10
-          </h2>
+        </h2>
 
         <p>
           TeamViewer is a cross-platform application that can be used for remote control, desktop sharing, online meetings, and file transfer between computers.

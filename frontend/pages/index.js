@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Hero from '../components/Hero';
 
+import Card from '../components/Card';
+
 
 export default function Home() {
   return (
@@ -11,12 +13,17 @@ export default function Home() {
       </Head>
       <main className="homepage">
         <Hero />
-        {/* <Grid columns={3}>
+        <div className="card-row-component" >
           <Card />
           <Card />
           <Card />
-        </Grid> */}
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
       </main>
-    </div>
+    </div >
   )
 }

@@ -6,6 +6,7 @@
   grid-area: text;
 }
 
+
 .hero-card-component {
   display: grid;
   grid-template-columns: 1fr;
@@ -19,7 +20,7 @@
 
 @include media-breakpoint-up(md) {
   .hero-card-component {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 8fr 4fr;
     grid-template-areas: "image text";
   }
 }
