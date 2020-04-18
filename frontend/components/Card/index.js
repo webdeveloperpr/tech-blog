@@ -1,4 +1,6 @@
 
+import Date from '../Date';
+
 const Card = () => {
   return (
     <div className="card-component">
@@ -9,6 +11,7 @@ const Card = () => {
         />
       </div>
       <div className="component__area-2">
+        <Date date="apr 14, 2020" />
         <h2 className="h5">
           How to Install TeamViewer on Debian 10
         </h2>

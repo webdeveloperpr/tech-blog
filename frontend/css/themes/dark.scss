@@ -1,5 +1,6 @@
 $dark-blue: #131217;
 $white: #fff;
+$border-color: #1a202c;
 
 html {
   font-family: Hind;
@@ -16,6 +17,14 @@ h4,
 h5,
 h6,
 p,
-a {
+a,
+ul,
+li,
+span {
   color: $white;
+}
+
+svg[class~="svg-inline--fa"] {
+  fill: white;
+  color: white
 }

@@ -1,14 +1,17 @@
 
+import Date from '../Date';
+
 const Hero = () => {
   return (
-    <div className="mb-4 hero-card-component">
+    <div className="hero-card-component">
       <div className="hero-card-component__area-1">
         <img
           className="img-responsive"
-          src="http://placehold.it/2089x1175"
+          src="http://unsplash.it/2089/1175"
         />
       </div>
       <div className="hero-card-component__area-2">
+        <Date date="apr 14, 2020" />
         <h2>
           How to Install TeamViewer on Debian 10
         </h2>

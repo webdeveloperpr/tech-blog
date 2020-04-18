@@ -1,0 +1,24 @@
+.card-horizontal-component-details {
+  grid-area: details;
+}
+
+.card-horizontal-component-image {
+  grid-area: image;
+}
+
+.card-horizontal-component {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 12fr 0fr;
+  grid-template-areas: "details image";
+
+  @extend .py-4;
+  border-top: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+}
+
+@include media-breakpoint-up(lg) {
+  .card-horizontal-component {
+    grid-template-columns: 10fr 2fr;
+  }
+}

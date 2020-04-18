@@ -1,0 +1,69 @@
+.nav-component > * {
+  align-items: center;
+}
+
+.nav-component__logo {
+  grid-area: logo;
+  font-weight: bold;
+  display: flex;
+}
+
+.nav-component__links {
+  grid-area: links;
+  display: none;
+}
+
+.nav-component__search {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-component__list {
+  list-style-type: none;
+}
+
+.nav-component__list-item + * {
+  @extend .ml-2, .py-2;
+}
+
+.nav-component__list-item {
+  display: inline-block;
+}
+
+.nav-component {
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  grid-template-columns: 100px 0px 1fr;
+  grid-template-areas: "logo links search";
+  @extend .px-4;
+  border-bottom: 1px solid $border-color;
+  background-color: $dark-blue;
+  min-height: 65px;
+}
+
+.nav-component--is-slide-up {
+  transition: top 0.4s;
+  top: -15%;
+}
+
+.nav-component--is-slide-down {
+  transition: top 0.4s;
+  top: 0%;
+}
+
+@include media-breakpoint-up(md) {
+  .nav-component {
+    grid-template-columns: 100px 9fr 1fr;
+    grid-template-areas: "logo links search";
+  }
+  
+  .nav-component__links {
+    display: flex;
+  }
+}

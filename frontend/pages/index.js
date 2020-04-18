@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import Hero from '../components/Hero';
-
 import Card from '../components/Card';
-
+import CardHorizontal from '../components/CardHorizontal';
 
 export default function Home() {
   return (
@@ -11,19 +10,25 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="homepage">
-        <Hero />
-        <div className="card-row-component" >
+      <div className="homepage">
+        <section className="homepage__cb-1">
+          <Hero />
+        </section>
+        <section className="homepage__cb-2" >
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </main>
+        </section>
+        <section className="homepage__cb-3">
+          <CardHorizontal />
+          <CardHorizontal />
+          <CardHorizontal />
+          <CardHorizontal />
+          <CardHorizontal />
+          <CardHorizontal />
+          <CardHorizontal />
+        </section>
+      </div>
     </div >
   )
 }

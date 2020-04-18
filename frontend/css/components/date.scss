@@ -1,0 +1,5 @@
+.date-component__icon + * {
+  @extend .ml-1;
+  @extend .t-up;
+  font-size: 0.75rem;
+}
