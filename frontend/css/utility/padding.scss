@@ -40,7 +40,7 @@
   }
 }
 
-@for $i from 1 through 6 {
+@for $i from 1 through 8 {
    $num: ($i * 0.5) + rem;
  
   @include px-mixin($num, $i);

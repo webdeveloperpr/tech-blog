@@ -25,8 +25,6 @@ export default function Home() {
           <CardHorizontal />
           <CardHorizontal />
           <CardHorizontal />
-          <CardHorizontal />
-          <CardHorizontal />
         </section>
       </div>
     </div >

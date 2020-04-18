@@ -39,7 +39,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  grid-template-columns: 100px 0px 1fr;
+  grid-template-columns: auto 0px 1fr;
   grid-template-areas: "logo links search";
   @extend .px-4;
   border-bottom: 1px solid $border-color;
@@ -59,7 +59,8 @@
 
 @include media-breakpoint-up(md) {
   .nav-component {
-    grid-template-columns: 100px 9fr 1fr;
+    grid-template-columns: auto 9fr 1fr;
+    column-gap: 2rem;
     grid-template-areas: "logo links search";
   }
   

@@ -1,3 +1,33 @@
-.footer-component {
+.footer-component-copyright {
+  display: flex;
+  grid-area: copyright;
+  align-items: center;
+}
 
+.footer-component-links {
+  display: flex;
+  grid-area: links;
+  align-items: center;
+  ul {
+    li {
+      display: inline-block;
+      @extend .ml-2;
+    }
+  }
+}
+
+.footer-component-social {
+  grid-area: social;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer-component {
+  @extend .px-8;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  column-gap: 2rem;
+  grid-template-areas: "copyright links social";
+  @extend .py-4;
 }

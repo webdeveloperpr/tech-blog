@@ -1,6 +1,7 @@
 $dark-blue: #131217;
 $white: #fff;
 $border-color: #1a202c;
+$footer-color: #191f2c;
 
 html {
   font-family: Hind;
@@ -26,5 +27,10 @@ span {
 
 svg[class~="svg-inline--fa"] {
   fill: white;
-  color: white
+  color: white;
+}
+
+// components
+.footer-component {
+  background-color: $footer-color;
 }
