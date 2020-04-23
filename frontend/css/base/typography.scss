@@ -47,32 +47,54 @@
 
   p,
   .p {
-    @include font-size(1, 0.5);
+    @include font-size($base, 1);
     font-weight: 300;
   }
 
   span,
   .span {
-    @include font-size(1, 1);
+    @include font-size($base, 1);
   }
 
   a,
   .link {
-    @include font-size(1, 1);
+    @include font-size($base, 1);
     text-decoration: none;
   }
 }
 
-@include create-font-sizes(1, 0.03);
+@include create-font-sizes(1.05, 0);
 
 @include media-breakpoint-up(md) {
-  @include create-font-sizes(1, 0.05);
+  @include create-font-sizes(1.05, 0.01);
 }
 
 @include media-breakpoint-up(lg) {
-  @include create-font-sizes(1, 0.1);
+  @include create-font-sizes(1.05, 0.02);
 }
 
 @include media-breakpoint-up(xl) {
-  @include create-font-sizes(1, 0.16);
+  @include create-font-sizes(1.05, 0.05);
+}
+
+p + h1,
+p + h2,
+p + h3,
+p + h4,
+p + h5,
+p + h6 {
+  margin-top: 2rem;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+li,
+span {
+  letter-spacing: 0.8px;
 }

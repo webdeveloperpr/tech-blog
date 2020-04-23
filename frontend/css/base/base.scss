@@ -33,7 +33,7 @@ main {
     max-width: map-get($breakpoints, lg) + px;
   }
   @include media-breakpoint-up(xl) {
-    max-width: map-get($breakpoints, xl) + px;
+    max-width: 1400 + px;
   }
 
   @extend .mx-auto;

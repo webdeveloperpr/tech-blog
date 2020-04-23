@@ -1,9 +1,10 @@
 import Head from 'next/head'
+import Link from 'next/link';
 import Hero from '../components/Hero';
 import Card from '../components/Card';
 import CardHorizontal from '../components/CardHorizontal';
 
-export default function Home() {
+const Home = () => {
   return (
     <div className="container">
       <Head>
@@ -30,3 +31,5 @@ export default function Home() {
     </div >
   )
 }
+
+export default Home;

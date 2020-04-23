@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Nav extends React.Component {
@@ -36,16 +37,30 @@ class Nav extends React.Component {
     return (
       <nav className={`nav-component ${navState[this.state.scrollDirection]}`}>
         <div className="nav-component__logo">
-          <h1 className="p mb-0">Tech Blog</h1>
+          <h1 className="p mb-0">
+            <Link href="/">Tech Blog</Link>
+          </h1>
         </div>
         <div className="nav-component__links">
           <ul className="nav-component__list">
-            <li className="nav-component__list-item"><a className="mb-0" href="">Ubuntu</a></li>
-            <li className="nav-component__list-item"><a className="mb-0" href="">Centos</a></li>
-            <li className="nav-component__list-item"><a className="mb-0" href="">Debian</a></li>
-            <li className="nav-component__list-item"><a className="mb-0" href="">Commands</a></li>
-            <li className="nav-component__list-item"><a className="mb-0" href="">Series</a></li>
-            <li className="nav-component__list-item"><a className="mb-0" href="">Donate</a></li>
+            <li className="nav-component__list-item">
+              <Link className="mb-0" href="/article">Ubuntu</Link>
+            </li>
+            <li className="nav-component__list-item">
+              <Link className="mb-0" href="/article">Centos</Link>
+            </li>
+            <li className="nav-component__list-item">
+              <Link className="mb-0" href="/article">Debian</Link>
+            </li>
+            <li className="nav-component__list-item">
+              <Link className="mb-0" href="/article">Commands</Link>
+            </li>
+            <li className="nav-component__list-item">
+              <Link className="mb-0" href="/article">Series</Link>
+            </li>
+            <li className="nav-component__list-item">
+              <Link className="mb-0" href="/article">Donate</Link>
+            </li>
           </ul>
         </div>
         <div className="nav-component__search">

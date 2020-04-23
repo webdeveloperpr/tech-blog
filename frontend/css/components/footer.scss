@@ -24,6 +24,7 @@
 }
 
 .footer-component {
+  @extend .mt-4;
   @extend .px-8;
   display: grid;
   grid-template-columns: auto auto 1fr;
