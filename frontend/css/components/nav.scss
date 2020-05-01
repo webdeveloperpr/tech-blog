@@ -43,8 +43,11 @@
   grid-template-areas: "logo links search";
   @extend .px-4;
   border-bottom: 1px solid $border-color;
-  background-color: $dark-blue;
   min-height: 65px;
+  a {
+    font-size: 1rem;
+    font-weight: 300;
+  }
 }
 
 .nav-component--is-slide-up {
@@ -63,7 +66,7 @@
     column-gap: 2rem;
     grid-template-areas: "logo links search";
   }
-  
+
   .nav-component__links {
     display: flex;
   }

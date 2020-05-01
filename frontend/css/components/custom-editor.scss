@@ -1,0 +1,14 @@
+
+.editor-component__toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  span,
+  li,
+  a {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+}

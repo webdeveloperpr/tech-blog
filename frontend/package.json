@@ -13,9 +13,15 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "classnames": "^2.2.6",
+    "draft-js": "^0.11.5",
+    "draftjs-to-html": "^0.9.1",
     "next": "9.3.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "typicons.font": "^2.0.9"
+    "react-draft-wysiwyg": "^1.14.5",
+    "sass": "^1.26.5"
+  },
+  "devDependencies": {
+    "@zeit/next-sass": "^1.0.1"
   }
 }

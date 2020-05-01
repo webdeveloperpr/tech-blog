@@ -1,14 +1,20 @@
-$dark-blue: #131217;
-$white: #fff;
-$border-color: #1a202c;
-$footer-color: #191f2c;
+$bg: #efefef;
+$border-color: #eee;
+$text-color: #444;
+
+/* states */
+$success: #dc3545;
+$primary: #287bfe;
+$info: #2aa2b8;
+$warning: #fbc108;
+$success: #28a745;
 
 html {
   font-family: Hind;
 }
 
 body {
-  background-color: $dark-blue;
+  background-color: $bg;
 }
 
 h1,
@@ -22,15 +28,49 @@ a,
 ul,
 li,
 span {
-  color: $white;
+  color: $text-color;
+}
+
+.nav-component,
+.footer-component {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  ul,
+  li,
+  span {
+    color: #fff;
+  }
 }
 
 svg[class~="svg-inline--fa"] {
-  fill: white;
-  color: white;
+  fill: black;
+  color: black;
 }
 
 // components
-.footer-component {
-  background-color: $footer-color;
+
+.footer-component,
+.nav-component {
+  background-color: #222;
+}
+
+.hero-card-component,
+.card-component,
+.card-horizontal-component {
+  background: #fff;
+}
+
+.card-horizontal-component {
+  border-top: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+}
+
+.article-page__body {
+  background: #fff;
 }

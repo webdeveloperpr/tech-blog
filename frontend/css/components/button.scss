@@ -1,0 +1,26 @@
+.btn {
+  @extend .px-2;
+  @extend .py-1;
+  background: $info;
+  color: #fff;
+  display: inline-block;
+  &:hover {
+    background: darken($info, 5%);
+    cursor: pointer;
+  }
+}
+
+.btn--sm {
+  @extend .px-2;
+  @extend .py-2;
+}
+
+.btn--md {
+  @extend .px-3;
+  @extend .py-3;
+}
+
+.btn--lg {
+  @extend .px-4;
+  @extend .py-4;
+}

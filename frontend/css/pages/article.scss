@@ -9,8 +9,9 @@
 }
 
 .article-page__body {
-  grid-area: article-body;
-  min-height: 100vh;
+  padding: 1rem;
+  grid-area: article-body;  
+  min-height: 70vh;
 }
 
 .article-page {

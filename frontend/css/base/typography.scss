@@ -1,7 +1,7 @@
 @mixin font-size($font-size, $line-height) {
   $lh: (floor($font-size) + $line-height) + rem;
   $padding: $line-height * 0.1;
-
+  font-family: "Roboto", sans-serif;
   margin-top: -$padding + rem;
   font-size: $font-size + rem;
   line-height: $lh;
@@ -11,49 +11,37 @@
 @mixin create-font-sizes($base, $scale) {
   h1,
   .h1 {
-    @include font-size($base + ($scale * 7), 1);
-    font-weight: bold;
+    @include font-size($base + ($scale * 30), 1);
   }
 
   h2,
   .h2 {
     @include font-size($base + ($scale * 6), 1);
-    font-weight: bold;
   }
 
   h3,
   .h3 {
     @include font-size($base + ($scale * 5), 1);
-    font-weight: bold;
   }
 
   h4,
   .h4 {
     @include font-size($base + ($scale * 4), 1);
-    font-weight: bold;
   }
 
   h5,
   .h5 {
     @include font-size($base + ($scale * 3), 1);
-    font-weight: bold;
   }
 
   h6,
   .h6 {
     @include font-size($base + ($scale * 2), 1);
-    font-weight: bold;
   }
 
   p,
   .p {
-    @include font-size($base, 1);
-    font-weight: 300;
-  }
-
-  span,
-  .span {
-    @include font-size($base, 1);
+    @include font-size($base, 0.75);
   }
 
   a,
@@ -96,5 +84,20 @@ h6,
 a,
 li,
 span {
-  letter-spacing: 0.8px;
+  letter-spacing: 0.3px;
+}
+
+// Font Styles
+em {
+  font-style: italic;
+}
+
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
 }

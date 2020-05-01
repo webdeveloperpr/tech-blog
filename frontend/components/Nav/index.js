@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Nav extends React.Component {
@@ -38,28 +37,28 @@ class Nav extends React.Component {
       <nav className={`nav-component ${navState[this.state.scrollDirection]}`}>
         <div className="nav-component__logo">
           <h1 className="p mb-0">
-            <Link href="/">Tech Blog</Link>
+            <a href="/">Tech Blog</a>
           </h1>
         </div>
         <div className="nav-component__links">
           <ul className="nav-component__list">
             <li className="nav-component__list-item">
-              <Link className="mb-0" href="/article">Ubuntu</Link>
+              <a className="mb-0" href="/article">Ubuntu</a>
             </li>
             <li className="nav-component__list-item">
-              <Link className="mb-0" href="/article">Centos</Link>
+              <a className="mb-0" href="/article">Centos</a>
             </li>
             <li className="nav-component__list-item">
-              <Link className="mb-0" href="/article">Debian</Link>
+              <a className="mb-0" href="/article">Debian</a>
             </li>
             <li className="nav-component__list-item">
-              <Link className="mb-0" href="/article">Commands</Link>
+              <a className="mb-0" href="/article">Commands</a>
             </li>
             <li className="nav-component__list-item">
-              <Link className="mb-0" href="/article">Series</Link>
+              <a className="mb-0" href="/article">Series</a>
             </li>
             <li className="nav-component__list-item">
-              <Link className="mb-0" href="/article">Donate</Link>
+              <a className="mb-0" href="/article">Donate</a>
             </li>
           </ul>
         </div>

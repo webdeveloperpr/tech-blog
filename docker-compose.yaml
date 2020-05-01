@@ -12,19 +12,8 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: passwd
       MYSQL_ROOT_PASSWORD: passwd
-  # Service 2
-  backend:
-    container_name: backend
-    build: ./backend
     volumes:
-      - ./backend:/usr/src/backend
-    ports:
-      - "8000:8000"
-    stdin_open: true
-    tty: true
-    command: python3 manage.py runserver 0.0.0.0:8000
-    depends_on:
-      - db
+      - ./database:/docker-entrypoint-initdb.d
   # Service 3
   frontend:
     container_name: frontend
@@ -39,3 +28,17 @@ services:
       - backend
       - db
     command: npm run dev
+  # Service 2
+  backend:
+    container_name: backend
+    build: ./backend
+    volumes:
+      - ./backend:/usr/src/backend
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    command: "python3 manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+

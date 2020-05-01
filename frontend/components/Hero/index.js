@@ -22,7 +22,7 @@ const Hero = () => {
           Prerequisites
           </p>
 
-        <a>Read More -></a>
+        <a className="btn d-block t-center">Read More</a>
       </div>
     </div>
   )

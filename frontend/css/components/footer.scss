@@ -11,7 +11,7 @@
   ul {
     li {
       display: inline-block;
-      @extend .ml-2;
+      @extend .mr-2;
     }
   }
 }
@@ -24,8 +24,11 @@
 }
 
 .footer-component {
+  a {
+    font-size: 1rem;
+    font-weight: 300;
+  }
   @extend .mt-4;
-  @extend .px-8;
   display: grid;
   grid-template-columns: auto auto 1fr;
   column-gap: 2rem;

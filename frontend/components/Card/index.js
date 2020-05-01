@@ -4,13 +4,13 @@ import Date from '../Date';
 const Card = () => {
   return (
     <div className="card-component">
-      <div className="component__area-1">
+      <div className="card-component__area-1">
         <img
           className="img-responsive"
           src="http://unsplash.it/2089/1175"
         />
       </div>
-      <div className="component__area-2">
+      <div className="card-component__area-2">
         <Date date="apr 14, 2020" />
         <h2 className="h5">
           How to Install TeamViewer on Debian 10
@@ -22,7 +22,7 @@ const Card = () => {
           Prerequisites
           </p>
 
-        <a>Read More -></a>
+        <a className="btn">Read More</a>
       </div>
     </div>
   )
