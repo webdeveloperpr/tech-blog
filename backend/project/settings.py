@@ -26,14 +26,14 @@ SECRET_KEY = '$-7_cooh@zzv^i4)g8d9rs^!#gb+80)jmg8m=hr6__trfdm&ap'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '0.0.0.0',
+    '*',
 ]
-
 
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    'corsheaders',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,6 +89,10 @@ DATABASES = {
     }
 }
 
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 # Rest Framework Settings
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -131,4 +136,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'

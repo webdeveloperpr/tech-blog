@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Editor from '../../components/Editor';
+import Editor from '../../../components/Editor';
 
 const Article = () => {
   return (

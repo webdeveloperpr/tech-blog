@@ -14,3 +14,22 @@
   grid-template-columns: 1fr;
   grid-template-areas: "image" "text";
 }
+
+.card-component__content * {
+  display: none;
+}
+
+.card-component__content p:first-of-type {
+  display: block;
+  white-space: wrap;
+  height: 6.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-component__image {
+  object-fit: cover;
+  object-position: center;
+  height: 18rem;
+  width: 100%;
+}

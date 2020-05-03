@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
 class Nav extends React.Component {
   constructor() {
@@ -6,6 +7,7 @@ class Nav extends React.Component {
     this.lastScrollTop = 0;
     this.state = {
       scrollDirection: 'down',
+      categories: []
     };
   }
 
@@ -20,9 +22,17 @@ class Nav extends React.Component {
     this.lastScrollTop = st <= 0 ? 0 : st;
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     window.addEventListener('scroll', this.handleScroll, false);
-  }
+    let categories = []
+    try {
+      const result = await axios('http://localhost:8000/categories/');
+      categories = result.data;
+    } catch (err) {
+      console.log(err);
+    }
+    this.setState({ categories });
+  };
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -42,24 +52,16 @@ class Nav extends React.Component {
         </div>
         <div className="nav-component__links">
           <ul className="nav-component__list">
-            <li className="nav-component__list-item">
-              <a className="mb-0" href="/article">Ubuntu</a>
-            </li>
-            <li className="nav-component__list-item">
-              <a className="mb-0" href="/article">Centos</a>
-            </li>
-            <li className="nav-component__list-item">
-              <a className="mb-0" href="/article">Debian</a>
-            </li>
-            <li className="nav-component__list-item">
-              <a className="mb-0" href="/article">Commands</a>
-            </li>
-            <li className="nav-component__list-item">
-              <a className="mb-0" href="/article">Series</a>
-            </li>
-            <li className="nav-component__list-item">
-              <a className="mb-0" href="/article">Donate</a>
-            </li>
+            {this.state.categories.map(category => {
+              return (
+                <li
+                  key={category.id}
+                  className="nav-component__list-item"
+                >
+                  <a className="mb-0" href="/article">{category.name}</a>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="nav-component__search">
@@ -73,5 +75,9 @@ class Nav extends React.Component {
     );
   }
 }
+
+Nav.defaultProps = {
+  categories: [],
+};
 
 export default Nav;

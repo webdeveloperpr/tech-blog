@@ -25,6 +25,10 @@ class PostAdmin(admin.ModelAdmin):
     )
 
 
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('image_tag')
+
+
 # Register your models here.
 admin.site.register(Category)
 admin.site.register(Image)

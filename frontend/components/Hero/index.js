@@ -1,27 +1,36 @@
 
 import Date from '../Date';
 
-const Hero = () => {
+const Hero = (props) => {
+  const image = props.images && props.images.length
+    ? `http://localhost:8000${props.images[0].image}`
+    : 'http://unsplash.it/2089/1175'
+
   return (
     <div className="hero-card-component">
       <div className="hero-card-component__area-1">
         <img
           className="img-responsive"
-          src="http://unsplash.it/2089/1175"
+          src={image}
+          alt="hero"
         />
       </div>
       <div className="hero-card-component__area-2">
         <h2>
-          How to Install TeamViewer on Debian 10
+          {props.title}
         </h2>
         <Date className="mb-1" date="apr 14, 2020" />
-        <p>
-          TeamViewer is a cross-platform application that can be used for remote control, desktop sharing, online meetings, and file transfer between computers.
-          This tutorial explains how to install TeamViewer on Debian 10, Buster.
-          Prerequisites
-          </p>
+        <div
+          className="hero-card-component__content"
+          dangerouslySetInnerHTML={{ __html: props.html }}
+        />
 
-        <a className="btn d-block t-center">Read More</a>
+        <a
+          href={`/articles/view/${props.id}`}
+          className="btn d-block t-center"
+        >
+          Read More
+        </a>
       </div>
     </div>
   )

@@ -24,3 +24,15 @@
     grid-template-areas: "image text";
   }
 }
+
+.hero-card-component__content * {
+  display: none;
+}
+
+.hero-card-component__content p:first-of-type {
+  display: block;
+  white-space: wrap;
+  height: 10.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
