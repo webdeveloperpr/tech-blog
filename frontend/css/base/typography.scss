@@ -1,7 +1,6 @@
 @mixin font-size($font-size, $line-height) {
   $lh: (floor($font-size) + $line-height) + rem;
   $padding: $line-height * 0.1;
-  font-family: "Roboto", sans-serif;
   margin-top: -$padding + rem;
   font-size: $font-size + rem;
   line-height: $lh;
@@ -85,6 +84,7 @@ a,
 li,
 span {
   letter-spacing: 0.3px;
+  font-family: "Roboto", sans-serif;
 }
 
 // Font Styles

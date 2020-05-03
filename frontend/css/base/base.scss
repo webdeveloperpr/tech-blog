@@ -23,15 +23,6 @@ main {
   max-width: 1184px;
   @extend .px-2, .px-2;
   @extend .mt-10;
-  @include media-breakpoint-up(sm) {
-    max-width: map-get($breakpoints, sm) + px;
-  }
-  @include media-breakpoint-up(md) {
-    max-width: map-get($breakpoints, md) + px;
-  }
-  @include media-breakpoint-up(lg) {
-    max-width: map-get($breakpoints, lg) + px;
-  }
   @include media-breakpoint-up(xl) {
     max-width: 1400 + px;
   }

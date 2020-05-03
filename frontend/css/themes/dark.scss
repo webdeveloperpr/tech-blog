@@ -9,6 +9,11 @@ $info: #2aa2b8;
 $warning: #fbc108;
 $success: #28a745;
 
+.white {
+  fill: #fff;
+  color: #fff;
+}
+
 html {
   font-family: Hind;
 }
@@ -48,12 +53,6 @@ span {
   }
 }
 
-svg[class~="svg-inline--fa"] {
-  fill: black;
-  color: black;
-}
-
-// components
 
 .footer-component,
 .nav-component {

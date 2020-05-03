@@ -64,7 +64,7 @@ class Nav extends React.Component {
         </div>
         <div className="nav-component__search">
           <FontAwesomeIcon
-            className="date-component__icon"
+            className="date-component__icon white"
             icon="search"
             size="1x"
           />

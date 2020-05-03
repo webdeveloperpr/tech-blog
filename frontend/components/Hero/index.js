@@ -11,11 +11,10 @@ const Hero = () => {
         />
       </div>
       <div className="hero-card-component__area-2">
-        <Date date="apr 14, 2020" />
         <h2>
           How to Install TeamViewer on Debian 10
         </h2>
-
+        <Date className="mb-1" date="apr 14, 2020" />
         <p>
           TeamViewer is a cross-platform application that can be used for remote control, desktop sharing, online meetings, and file transfer between computers.
           This tutorial explains how to install TeamViewer on Debian 10, Buster.

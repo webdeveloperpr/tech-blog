@@ -1,3 +1,6 @@
+.date-component {
+  @extend .mb-2;
+}
 .date-component__icon + * {
   @extend .ml-1;
   @extend .t-up;

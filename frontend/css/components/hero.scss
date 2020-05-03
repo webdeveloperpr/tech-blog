@@ -18,7 +18,7 @@
     "text";
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(lg) {
   .hero-card-component {
     grid-template-columns: 8fr 4fr;
     grid-template-areas: "image text";

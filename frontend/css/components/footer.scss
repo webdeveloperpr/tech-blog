@@ -30,8 +30,9 @@
   }
   @extend .mt-4;
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto 1fr;
   column-gap: 2rem;
-  grid-template-areas: "copyright links social";
+  grid-template-areas: "links social";
   @extend .py-4;
+  @extend .px-4;
 }
