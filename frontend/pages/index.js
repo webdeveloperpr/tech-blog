@@ -4,7 +4,7 @@ import Card from '../components/Card';
 import CardHorizontal from '../components/CardHorizontal';
 import axios from 'axios';
 
-const Home = (props) => {
+const Home = props => {
   const posts = props.posts;
 
   const heroPost = posts[0];
@@ -23,10 +23,10 @@ const Home = (props) => {
             <Hero
               id={heroPost.id}
               title={heroPost.title}
-              html={heroPost.editor_html}
+              html={heroPost.content}
               slug={heroPost.slug}
               images={heroPost.images}
-              categories={heroPost.editor_html}
+              categories={heroPost.content}
             />
           </section>
         }
@@ -38,7 +38,7 @@ const Home = (props) => {
                   id={post.id}
                   key={post.id}
                   title={post.title}
-                  html={post.editor_html}
+                  html={post.content}
                   slug={post.slug}
                   images={post.images}
                   categories={post.editor_html}
@@ -52,7 +52,7 @@ const Home = (props) => {
             {horizontalCardPosts.map(post => {
               <CardHorizontal
                 title={post.title}
-                html={post.editor_html}
+                html={post.content}
                 slug={post.slug}
                 images={post.images}
                 categories={post.editor_html}
@@ -61,7 +61,7 @@ const Home = (props) => {
           </section>
         }
       </div>
-    </div >
+    </div>
   )
 }
 

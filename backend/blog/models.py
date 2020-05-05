@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Timestamp():
@@ -40,6 +41,7 @@ class Post(models.Model, Timestamp):
     slug = models.SlugField(unique=True, blank=True)
     editor_state = models.TextField(blank=True)
     editor_html = models.TextField(blank=True)
+    content = RichTextUploadingField(blank=True)
     categories = models.ManyToManyField(
         Category,
         through='PostCategory',

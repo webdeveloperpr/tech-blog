@@ -4,6 +4,9 @@
 
 .card-component__area-2 {
   grid-area: text;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   padding: 0 1rem 1rem 1rem;
 }
 
@@ -12,7 +15,12 @@
   column-gap: 1rem;
   row-gap: 1rem;
   grid-template-columns: 1fr;
+  grid-template-rows: 280px minmax(280px, 1fr);
   grid-template-areas: "image" "text";
+}
+
+.card-component__content {
+  flex: 1;
 }
 
 .card-component__content * {
@@ -30,6 +38,6 @@
 .card-component__image {
   object-fit: cover;
   object-position: center;
-  height: 18rem;
+  height: 100%;
   width: 100%;
 }

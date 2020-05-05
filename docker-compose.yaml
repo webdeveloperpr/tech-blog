@@ -14,7 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./database:/docker-entrypoint-initdb.d
-  # Service 3
+  # Service 2
   frontend:
     container_name: frontend
     build: ./frontend
@@ -23,12 +23,12 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     depends_on:
       - backend
       - db
-    command: npm run start
-  # Service 2
+    command: npm run dev
+  # Service 3
   backend:
     container_name: backend
     build: ./backend
@@ -41,4 +41,15 @@ services:
     command: "python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
-
+  # Service 4
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+      - db

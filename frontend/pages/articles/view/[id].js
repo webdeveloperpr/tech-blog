@@ -20,12 +20,8 @@ const Article = (props) => {
 
         </aside>
         <div className="article-page__body">
-          <h2>{props.post.title}</h2>
-          <img
-            className="img-responsive mb-4"
-            src={image}
-          />
-          <div dangerouslySetInnerHTML={{ __html: props.post.editor_html }} />
+          <h1>{props.post.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: props.post.content }} />
 
         </div>
         <aside className="article-page__right-rail">

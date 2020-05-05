@@ -32,4 +32,5 @@ class PostSerializer(serializers.ModelSerializer):
             'slug',
             'editor_state',
             'editor_html',
+            'content',
         ]

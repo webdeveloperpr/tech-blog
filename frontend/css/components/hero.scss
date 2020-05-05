@@ -25,6 +25,10 @@
   }
 }
 
+.hero-card-component__content {
+  flex: 1;
+}
+
 .hero-card-component__content * {
   display: none;
 }
@@ -35,4 +39,11 @@
   height: 10.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.hero-card-component__image {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
 }

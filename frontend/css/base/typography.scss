@@ -50,14 +50,14 @@
   }
 }
 
-@include create-font-sizes(1.05, 0);
+@include create-font-sizes(1.05, 0.02);
 
 @include media-breakpoint-up(md) {
-  @include create-font-sizes(1.05, 0.01);
+  @include create-font-sizes(1.05, 0.03);
 }
 
 @include media-breakpoint-up(lg) {
-  @include create-font-sizes(1.05, 0.02);
+  @include create-font-sizes(1.05, 0.04);
 }
 
 @include media-breakpoint-up(xl) {
