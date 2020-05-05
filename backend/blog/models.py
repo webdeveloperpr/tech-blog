@@ -39,8 +39,6 @@ class Post(models.Model, Timestamp):
     """
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    editor_state = models.TextField(blank=True)
-    editor_html = models.TextField(blank=True)
     content = RichTextUploadingField(blank=True)
     categories = models.ManyToManyField(
         Category,

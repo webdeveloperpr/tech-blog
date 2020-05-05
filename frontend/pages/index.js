@@ -26,7 +26,7 @@ const Home = props => {
               html={heroPost.content}
               slug={heroPost.slug}
               images={heroPost.images}
-              categories={heroPost.content}
+              categories={heroPost.cagetories}
             />
           </section>
         }
@@ -41,7 +41,7 @@ const Home = props => {
                   html={post.content}
                   slug={post.slug}
                   images={post.images}
-                  categories={post.editor_html}
+                  categories={post.categories}
                 />
               )
             })}
@@ -55,7 +55,7 @@ const Home = props => {
                 html={post.content}
                 slug={post.slug}
                 images={post.images}
-                categories={post.editor_html}
+                categories={post.categories}
               />
             })}
           </section>

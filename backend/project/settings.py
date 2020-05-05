@@ -32,11 +32,15 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # 3rd Parth Apps
     'rest_framework',
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
+    'dbbackup',
+    # Apps
     'blog.apps.BlogConfig',
+    # Core
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

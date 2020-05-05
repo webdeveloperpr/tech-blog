@@ -1,0 +1,163 @@
+Parameters:
+  NameOfService:
+    Description: stack description
+    Type: String
+    Default: production server
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access into the server
+    Type: String
+    Default: aws-eb
+Mappings:
+  RegionMap:
+    us-east-1:
+      AMI: ami-003f19e0e687de1cd
+Resources:
+  # Create an elastic IP so that the ip address doesn't change.
+  IPAddress:
+    Type: AWS::EC2::EIP
+    # Add the Elastic IP to the EC2 instance.
+  IPAssoc:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      InstanceId: !Ref "EC2Instance"
+      EIP: !Ref "IPAddress"
+    # Create the EC2 instance.
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId:
+        Fn::FindInMap:
+          - RegionMap
+          - !Ref AWS::Region
+          - AMI
+      SecurityGroupIds:
+        - !Ref EC2SecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Ref NameOfService
+      KeyName: !Ref KeyName
+      UserData:
+        "Fn::Base64": !Sub |
+          #!/bin/bash        
+
+          ######################################################################
+          # Time Config
+          ######################################################################          
+
+          # Changes the timezone so we can see relevant the log times.
+          sudo timedatectl set-timezone America/New_York          
+
+          ######################################################################
+          # Utils
+          ######################################################################
+
+          # Update packages
+          sudo apt update 
+
+          # Monitoring
+          sudo apt install htop          
+
+          # Install java
+          echo Y | sudo apt install openjdk-8-jdk
+
+          # Add SSH Keys
+          ssh-keygen -t rsa -C "production"
+
+          ######################################################################
+          # Docker
+          # https://linuxize.com/post/how-to-install-and-use-docker-on-debian-10/
+          ######################################################################
+                    
+          # Uninstall old versions
+          sudo apt remove docker docker-engine docker.io containerd runc || true
+
+          # Update packages
+          sudo apt update
+
+          # Install packages to allow apt to use a repository over HTTPS:
+          echo Y |
+              sudo apt-get install \
+              apt-transport-https \
+              ca-certificates \
+              curl \
+              gnupg-agent \
+              software-properties-common
+
+          # Add docker official GPG keys
+          curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+          # Set up stable repository
+          sudo add-apt-repository \
+            "deb [arch=amd64] https://download.docker.com/linux/debian \
+            $(lsb_release -cs) \
+            stable"
+
+          # Update packages
+          sudo apt-get update
+
+          # Install latest version off Docker Engine
+          echo Y | sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+          # Add user to docker to prevent having to sudo the Docker commands.  
+          sudo usermod -aG docker $USER
+
+          ######################################################################
+          # Docker Compose
+          # https://docs.docker.com/compose/install/
+          ######################################################################
+
+          # Download
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" \
+          -o /usr/local/bin/docker-compose
+
+          # Add executable permissions
+          sudo chmod +x /usr/local/bin/docker-compose
+
+          # Create Symlink
+          sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+          ######################################################################
+          # Swap Memory
+          ######################################################################
+
+          # Create the swapfile 128x32 = 2GB          
+          sudo dd if=/dev/zero of=/swapfile bs=128M count=16
+
+          # Set permissions
+          sudo chmod 600 /swapfile
+
+          # Make the swap file
+          sudo mkswap /swapfile
+
+          # mount the swap file
+          sudo swapon /swapfile
+
+          # idk what this is
+          sudo swapon -s
+
+          # set the swap memory every time OS boots up.
+          sudo su -c "echo /swapfile swap swap defaults 0 0 >> /etc/fstab"
+  EC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Open Ports 22 and 80
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+Outputs:
+  Website:
+    Description: The Public DNS for the EC2 Instance
+    Value: !Sub "http://${EC2Instance.PublicDnsName}"
+  InstanceId:
+    Description: InstanceId of the newly created EC2 instance
+    Value: !Ref "EC2Instance"
+  InstanceIPAddress:
+    Description: IP address of the newly created EC2 instance
+    Value: !Ref "IPAddress"
