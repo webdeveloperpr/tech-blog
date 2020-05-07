@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Nav />
-      <main className="mt-12">
+      <main className="mt-10">
         <Component {...pageProps} />
       </main>
       <Footer />

@@ -42,10 +42,9 @@
   grid-template-columns: auto 0px 1fr;
   grid-template-areas: "logo links search";
   @extend .px-4;
-  border-bottom: 1px solid $border-color;
   min-height: 65px;
   a {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 300;
   }
 }
@@ -63,7 +62,7 @@
 @include media-breakpoint-up(md) {
   .nav-component {
     grid-template-columns: auto 9fr 1fr;
-    column-gap: 2rem;
+    column-gap: 1rem;
     grid-template-areas: "logo links search";
   }
 

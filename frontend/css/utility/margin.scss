@@ -15,13 +15,11 @@
 @mixin mt-mixin($val, $i) {
   .mt-#{$i}.mt-#{$i} {
     margin-top: $val;
-    margin-top: $val;
   }
 }
 
 @mixin mr-mixin($val, $i) {
   .mr-#{$i}.mr-#{$i} {
-    margin-right: $val;
     margin-right: $val;
   }
 }
@@ -29,13 +27,11 @@
 @mixin mb-mixin($val, $i) {
   .mb-#{$i}.mb-#{$i} {
     margin-bottom: $val;
-    margin-bottom: $val;
   }
 }
 
 @mixin ml-mixin($val, $i) {
   .ml-#{$i}.ml-#{$i} {
-    margin-left: $val;
     margin-left: $val;
   }
 }
