@@ -1,0 +1,23 @@
+#!/bin/bash
+function dev() {
+  echo "starting dev"
+  docker-compose \
+    --project-name tech-blog \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.dev.yaml \
+    up
+}
+
+function prod() {
+  docker-compose \
+    --project-name tech-blog \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.prod.yaml \
+    up
+}
+
+if [ $1 == 'dev' ]; then
+  dev
+elif [ $1 == 'prod' ]; then
+  prod
+fi
