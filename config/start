@@ -8,6 +8,11 @@ function dev() {
     up
 }
 
+function dump() {
+  echo "starting dump"
+  # docker-compose exec -f db bash "mysql -u root -p --add-drop-database -B > ./database/docker-entrypoint-initdb.d/02-schema.sql"
+}
+
 function prod() {
   docker-compose \
     --project-name tech-blog \
@@ -18,6 +23,8 @@ function prod() {
 
 if [ $1 == 'dev' ]; then
   dev
+elif [ $1 == 'dump' ]; then
+  dump
 elif [ $1 == 'prod' ]; then
   prod
 fi

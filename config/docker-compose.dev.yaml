@@ -3,12 +3,13 @@ services:
   # Service 1
   db:
     image: mysql
+    container_name: db
     ports:
       - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
-      - ../database:/docker-entrypoint-initdb.d
+      - ../database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     env_file:
       - .env
   # Service 2
