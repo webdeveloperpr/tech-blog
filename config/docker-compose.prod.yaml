@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  # Service 2
+  frontend:
+    depends_on:
+      - backend
+  # Service 4
+  nginx:
+    depends_on:
+      - frontend
+      - backend

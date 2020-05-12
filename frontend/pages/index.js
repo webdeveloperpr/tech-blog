@@ -66,7 +66,7 @@ const Home = props => {
 }
 
 export async function getServerSideProps(context) {
-  let posts = {};
+  let posts = [];
   try {
     posts = await axios('http://backend:8000/posts');
     posts = posts.data;

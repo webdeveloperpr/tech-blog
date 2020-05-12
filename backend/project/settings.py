@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
-    'dbbackup',
     # Apps
     'blog.apps.BlogConfig',
     # Core
@@ -114,14 +113,13 @@ USE_TZ = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': 'passwd',
-        'HOST': "db",
-        'PORT': "3306",
+        'NAME': os.environ.get('MYSQL_DATABASE', ''),
+        'USER': os.environ.get('MYSQL_USER', ''),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', ''),
+        'HOST': os.environ.get('MYSQL_HOST', ''),
+        'PORT': int(os.environ.get('MYSQL_PORT', '')),
     }
 }
-
 
 # CORS
 CORS_ORIGIN_ALLOW_ALL = True
@@ -148,5 +146,5 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 STATICFILES_DIRS = []
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = os.environ.get('STATIC_URL', '')
+MEDIA_URL = os.environ.get('MEDIA_URL', '')

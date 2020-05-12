@@ -1,0 +1,34 @@
+version: "3.2"
+services:
+  # Service 1
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ../database:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
+  # Service 2
+  frontend:
+    depends_on:
+      - backend
+      - db
+    env_file:
+      - .env
+  # Service 3
+  backend:
+    depends_on:
+      - db
+    env_file:
+      - .env
+  # Service 4
+  nginx:
+    depends_on:
+      - frontend
+      - backend
+      - db
+    env_file:
+      - .env
