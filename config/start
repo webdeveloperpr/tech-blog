@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Starts the dev env
 function dev() {
   echo "starting dev"
   docker-compose \
@@ -8,11 +10,17 @@ function dev() {
     up
 }
 
-function dump() {
-  echo "starting dump"
-  # docker-compose exec -f db bash "mysql -u root -p --add-drop-database -B > ./database/docker-entrypoint-initdb.d/02-schema.sql"
+function dev-down() {
+  echo "starting dev"
+  docker-compose \
+    --project-name tech-blog \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.dev.yaml \
+    down
 }
 
+
+# Starts the prod env
 function prod() {
   docker-compose \
     --project-name tech-blog \
@@ -21,10 +29,49 @@ function prod() {
     up
 }
 
+# Enters the nextJS frontend
+function ssh-frontend() {
+  docker exec -it frontend /bin/bash
+}
+
+# Enters the django backend
+function ssh-backend() {
+  docker exec -it backend /bin/bash
+}
+
+# Enters the MySQL db
+function ssh-db() {
+  docker exec -it db /bin/bash
+}
+
+# Enters the nginx container
+function ssh-nginx() {
+  docker exec -it nginx /bin/sh
+}
+
+function db-dump() {
+  echo "starting dump"
+  docker exec db /usr/bin/mysqldump \
+    -uroot \
+    -ppasswd \
+    -B \
+    blog >database/docker-entrypoint-initdb.d/backup.sql
+}
+
 if [ $1 == 'dev' ]; then
   dev
-elif [ $1 == 'dump' ]; then
-  dump
+elif [ $1 == 'dev-down' ]; then
+  dev-down
 elif [ $1 == 'prod' ]; then
   prod
+elif [ $1 == 'ssh-frontend' ]; then
+  ssh-frontend
+elif [ $1 == 'ssh-backend' ]; then
+  ssh-backend
+elif [ $1 == 'ssh-nginx' ]; then
+  ssh-nginx
+elif [ $1 == 'ssh-db' ]; then
+  ssh-db
+elif [ $1 == 'db-dump' ]; then
+  db-dump
 fi
