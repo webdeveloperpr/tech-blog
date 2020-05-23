@@ -58,6 +58,8 @@ function db-dump() {
     blog >database/docker-entrypoint-initdb.d/backup.sql
 }
 
+# mysql -uroot -ppasswd -e"USE blog; SHOW TABLES;"
+
 if [ $1 == 'dev' ]; then
   dev
 elif [ $1 == 'dev-down' ]; then

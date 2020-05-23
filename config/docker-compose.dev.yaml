@@ -14,6 +14,7 @@ services:
       - .env
   # Service 2
   frontend:
+    command: ["./wait-for-it.sh", "db:3306", "--", "npm", "run", "dev"]
     depends_on:
       - backend
       - db
@@ -21,6 +22,16 @@ services:
       - .env
   # Service 3
   backend:
+    command:
+      [
+        "./wait-for-it.sh",
+        "frontend:3000",
+        "--",
+        "python3",
+        "manage.py",
+        "runserver",
+        "0.0.0.0:8000",
+      ]
     depends_on:
       - db
     env_file:
@@ -30,5 +41,6 @@ services:
     depends_on:
       - frontend
       - backend
+      - db
     env_file:
       - .env
