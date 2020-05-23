@@ -13,29 +13,32 @@ services:
     env_file:
       - .env
   # Service 2
-  frontend:
-    command: ["./wait-for-it.sh", "db:3306", "--", "npm", "run", "dev"]
+  backend:
+    restart: always
     depends_on:
-      - backend
       - db
     env_file:
       - .env
-  # Service 3
-  backend:
     command:
       [
         "./wait-for-it.sh",
-        "frontend:3000",
+        "db:3306",
         "--",
         "python3",
         "manage.py",
         "runserver",
         "0.0.0.0:8000",
       ]
+
+  # Service 3
+  frontend:
     depends_on:
+      - backend
       - db
     env_file:
       - .env
+    command: ["./wait-for-it.sh", "backend:8000", "--", "npm", "run", "dev"]
+
   # Service 4
   nginx:
     depends_on:
@@ -44,3 +47,4 @@ services:
       - db
     env_file:
       - .env
+    command: ["nginx", "-g", "daemon off;"]

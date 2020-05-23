@@ -1,9 +1,9 @@
 
 import Date from '../Date';
 
-const Hero = (props) => {
+const Hero = (props) => {  
   const image = props.images && props.images.length
-    ? `http://localhost:8000${props.images[0].image}`
+    ? props.images[0].image
     : 'http://unsplash.it/2089/1175'
 
   return (

@@ -16,7 +16,7 @@ library.add(
   faRss,
 )
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {  
   return (
     <>
       <Nav />
