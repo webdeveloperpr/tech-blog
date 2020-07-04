@@ -250,7 +250,7 @@ Resources:
             - !Ref "EC2IPAddress"
           TTL: "300"
           Type: A
-        - Name: !Sub "www.${HostedZoneName}."
+        - Name: !Sub "www.${HostedZoneName}." 
           ResourceRecords:
             - !Sub "${HostedZoneName}."
           TTL: "300"

@@ -71,6 +71,10 @@ function ssh-nginx() {
   docker exec -it nginx /bin/sh
 }
 
+function reload-nginx() {
+  docker exec nginx nginx -s reload
+}
+
 # Enters the MySQL db
 function ssh-db() {
   docker exec -it db /bin/bash

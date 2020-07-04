@@ -43,8 +43,6 @@ function get_ec2_public_ip() {
   echo $EC2_IP
 }
 
-
-
 function get_ec2_ip_address() {
   local EC2_IP=$(aws cloudformation \
     --region us-east-1 describe-stacks \
