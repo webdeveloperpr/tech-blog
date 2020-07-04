@@ -83,17 +83,13 @@ function deploy() {
   -f ./config/docker-compose.prod.yaml \
   down
 
+  #stop all containers
+  docker container stop $(docker container ls –aq)
+  
   # stop docker
-  docker rm -f $(docker ps -a -q)
-  
-  #remove docker images
-  docker rmi -f $(docker images -q)
-  
-  # Remove all stopped containers
-  #  - all stopped containers
-  #  - all networks not used by at least one container
-  #  - all dangling images
-  #  - all dangling build cache
+  docker rm -vf $(docker ps -a -q)
+  docker rmi -f $(docker images -a -q)
+
   echo y | docker system prune
 
   docker-compose \
