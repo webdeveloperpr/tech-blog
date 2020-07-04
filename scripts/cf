@@ -48,7 +48,7 @@ function get_ec2_ip_address() {
     --region us-east-1 describe-stacks \
     --stack-name $STACK_NAME \
     --query "Stacks[0].Outputs" |
-    jq -r '.[] | select(.OutputKey=="EC2IPAddress") | .OutputValue')
+    jq -r '.[] | select(.OutputKey=="InstanceIPAddress") | .OutputValue')
   echo $EC2_IP
 }
 
@@ -59,13 +59,59 @@ function ssh_ec2() {
 }
 
 function deploy() {
-  local DOCKER_PORT=2375
-  local PUBLIC_IP=$(get_ec2_ip_address)
-  local IP_ADDRESS=tcp://$PUBLIC_IP:$DOCKER_PORT
-  echo $PUBLIC_IP
+  local IP=$(get_ec2_public_ip)
+  echo "connecting to $IP"
+
+  ssh -i $AWS_KEY admin@$IP "
+  # remove repository
+  sudo rm -rf tech-blog
+
+  # clone repo  
+  git clone https://github.com/webdeveloperpr/tech-blog.git
+  cd tech-blog
+  "
+
+  sleep 10
+  scp -i $AWS_KEY config/.prod.env admin@$IP:tech-blog/config
+
+  ssh -i $AWS_KEY admin@$IP "
+  # start docker
+  cd tech-blog
   docker-compose \
-    -H $IP_ADDRESS \
-    -f ./config/docker-compose.base.yaml \
-    -f ./config/docker-compose.prod.yaml \
-    up
+  --project-name $PROJECT_NAME \
+  -f ./config/docker-compose.base.yaml \
+  -f ./config/docker-compose.prod.yaml \
+  down
+
+  # stop docker
+  docker rm -f $(docker ps -a -q)
+  
+  #remove docker images
+  docker rmi -f $(docker images -q)
+  
+  # Remove all stopped containers
+  #  - all stopped containers
+  #  - all networks not used by at least one container
+  #  - all dangling images
+  #  - all dangling build cache
+  echo y | docker system prune
+
+  docker-compose \
+  --project-name $PROJECT_NAME \
+  -f ./config/docker-compose.base.yaml \
+  -f ./config/docker-compose.prod.yaml \
+  up
+  "
 }
+
+# function deploy() {
+#   local DOCKER_PORT=2375
+#   local PUBLIC_IP=$(get_ec2_ip_address)
+#   local IP_ADDRESS=tcp://$PUBLIC_IP:$DOCKER_PORT
+#   echo $PUBLIC_IP
+#   docker-compose \
+#     -H $IP_ADDRESS \
+#     -f ./config/docker-compose.base.yaml \
+#     -f ./config/docker-compose.prod.yaml \
+#     up
+# }

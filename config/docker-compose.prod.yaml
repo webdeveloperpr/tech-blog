@@ -16,7 +16,7 @@ services:
       - backend
     env_file:
       - .prod.env
-    command: ["./wait-for-it.sh", "backend:8000", "--", "npm", "run", "dev"]
+    command: ["./wait-for-it.sh", "backend:8000", "--", "npm", "start"]
   # Service 4
   nginx:
     depends_on:
