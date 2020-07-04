@@ -1,25 +1,28 @@
 version: "3.2"
 services:
-  # Service 2
+  # Service 1
   frontend:
     container_name: frontend
     build: ../frontend
+    image: webdeveloperpr/tech-blog_frontend
     volumes:
       - ../frontend:/usr/src/frontend
     ports:
       # APP
       - "3000:3000"
-  # Service 3
+  # Service 2
   backend:
     container_name: backend
     build: ../backend
+    image: webdeveloperpr/tech-blog_backend
     volumes:
       - ../backend:/usr/src/backend
     ports:
       - "8000:8000"
-  # Service 4
+  # Service 3
   nginx:
     container_name: nginx
+    image: webdeveloperpr/tech-blog_nginx
     build: ../nginx
     volumes:
       - ../nginx/conf.d:/etc/nginx/conf.d

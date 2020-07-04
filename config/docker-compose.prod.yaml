@@ -1,11 +1,27 @@
 version: "3.2"
 services:
+  # Service 1
+  backend:
+    restart: always
+    env_file:
+      - .prod.env
+    command: >
+      sh -c "
+      python3 manage.py migrate &&
+      python3 manage.py runserver 0.0.0.0:8000
+      "
   # Service 2
   frontend:
     depends_on:
       - backend
+    env_file:
+      - .prod.env
+    command: ["./wait-for-it.sh", "backend:8000", "--", "npm", "run", "dev"]
   # Service 4
   nginx:
     depends_on:
       - frontend
       - backend
+    env_file:
+      - .prod.env
+    command: ["nginx", "-g", "daemon off;"]

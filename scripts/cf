@@ -1,0 +1,71 @@
+#!/bin/bash
+STACK_NAME=tech-blog
+AWS_KEY=~/aws-eb.pem
+TEMPLATE_BODY=file://$PWD/cloudformation/stack.yaml
+PARAMETERS=file://$PWD/config/parameters.json
+REGION=us-east-1
+function create_stack() {
+  echo "Creating $STACK_NAME stack"
+  aws cloudformation create-stack \
+    --stack-name $STACK_NAME \
+    --template-body $TEMPLATE_BODY \
+    --parameters $PARAMETERS \
+    --region $REGION
+}
+
+function update_stack() {
+  echo "Updating $STACK_NAME stack"
+  aws cloudformation update-stack \
+    --stack-name $STACK_NAME \
+    --template-body $TEMPLATE_BODY \
+    --parameters $PARAMETERS \
+    --region $REGION
+}
+
+function delete_stack() {
+  echo "Deleting $STACK_NAME stack"
+  aws cloudformation delete-stack \
+    --stack-name $STACK_NAME
+}
+
+function describe_stack() {
+  # Describes the stack resources
+  aws cloudformation describe-stack-resources \
+    --stack-name $STACK_NAME
+}
+
+function get_ec2_public_ip() {
+  local EC2_IP=$(aws cloudformation \
+    --region us-east-1 describe-stacks \
+    --stack-name $STACK_NAME \
+    --query "Stacks[0].Outputs" |
+    jq -r '.[] | select(.OutputKey=="PublicIP") | .OutputValue')
+  echo $EC2_IP
+}
+
+function get_ec2_ip_address() {
+  local EC2_IP=$(aws cloudformation \
+    --region us-east-1 describe-stacks \
+    --stack-name $STACK_NAME \
+    --query "Stacks[0].Outputs" |
+    jq -r '.[] | select(.OutputKey=="EC2IPAddress") | .OutputValue')
+  echo $EC2_IP
+}
+
+function ssh_ec2() {
+  local IP=$(get_ec2_public_ip)
+  echo "connecting to $IP"
+  ssh -i $AWS_KEY admin@$IP
+}
+
+function deploy() {
+  local DOCKER_PORT=2375
+  local PUBLIC_IP=$(get_ec2_ip_address)
+  local IP_ADDRESS=tcp://$PUBLIC_IP:$DOCKER_PORT
+  echo $PUBLIC_IP
+  docker-compose \
+    -H $IP_ADDRESS \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.prod.yaml \
+    up
+}

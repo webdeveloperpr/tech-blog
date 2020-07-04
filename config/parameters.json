@@ -1,0 +1,38 @@
+[
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "aws-eb"
+  },
+  {
+    "ParameterKey": "EC2InstanceType",
+    "ParameterValue": "t2.micro"
+  },
+  {
+    "ParameterKey": "EC2InstanceType",
+    "ParameterValue": "t2.micro"
+  },
+  {
+    "ParameterKey": "DBEngineVersion",
+    "ParameterValue": "8.0.19"
+  },
+  {
+    "ParameterKey": "DBName",
+    "ParameterValue": "blog"
+  },
+  {
+    "ParameterKey": "DBInstanceClass",
+    "ParameterValue": "db.t2.micro"
+  },
+  {
+    "ParameterKey": "DBAllocatedStorage",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "DBUsername",
+    "ParameterValue": "admin"
+  },
+  {
+    "ParameterKey": "DBPassword",
+    "ParameterValue": "password"
+  }
+]

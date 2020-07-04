@@ -2,7 +2,8 @@ version: "3.2"
 services:
   # Service 1
   db:
-    image: mysql
+    # Version AWS is using
+    image: mysql:8.0.19
     container_name: db
     ports:
       - "3306:3306"
@@ -29,7 +30,6 @@ services:
         "runserver",
         "0.0.0.0:8000",
       ]
-
   # Service 3
   frontend:
     depends_on:

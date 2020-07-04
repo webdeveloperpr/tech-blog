@@ -1,0 +1,121 @@
+#!/bin/bash
+
+DEV_ENV_FILE=config/.env
+PROD_ENV_FILE=config/.prod.env
+SQL_BACKUP_FILE=database/docker-entrypoint-initdb.d/backup.sql
+PROJECT_NAME=tech-blog
+
+function load-prod-env() {
+  set -o allexport
+  source $PROD_ENV_FILE
+  set +o allexport
+  echo "prod env loaded"
+}
+
+function load-dev-env() {
+  set -o allexport
+  source $DEV_ENV_FILE
+  set +o allexport
+  echo "dev env loaded"
+}
+
+# Starts the dev env
+function dev() {
+  echo "starting dev"
+  docker-compose \
+    --project-name $PROJECT_NAME \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.dev.yaml \
+    up
+}
+
+function prod() {
+  echo "starting prod"
+  docker-compose \
+    --project-name $PROJECT_NAME \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.prod.yaml \
+    up
+}
+
+function dev-down() {
+  echo "shutting dev down"
+  docker-compose \
+    --project-name $PROJECT_NAME \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.dev.yaml \
+    down
+}
+
+function prod-down() {
+  echo "starting prod"
+  docker-compose \
+    --project-name $PROJECT_NAME \
+    -f ./config/docker-compose.base.yaml \
+    -f ./config/docker-compose.prod.yaml \
+    down
+}
+
+# Enters the nextJS frontend
+function ssh-frontend() {
+  docker exec -it frontend /bin/bash
+}
+
+# Enters the django backend
+function ssh-backend() {
+  docker exec -it backend /bin/bash
+}
+
+# Enters the nginx container
+function ssh-nginx() {
+  docker exec -it nginx /bin/sh
+}
+
+# Enters the MySQL db
+function ssh-db() {
+  docker exec -it db /bin/bash
+}
+
+function export-dev-dump() {
+  load-dev-env
+  echo "exporting dump"
+  docker exec db /usr/bin/mysqldump \
+    -u$MYSQL_USER \
+    -p$MYSQL_PASSWORD \
+    -B \
+    $MYSQL_DATABASE >$SQL_BACKUP_FILE
+}
+
+function export-prod-dump() {
+  load-prod-env
+  mysqldump \
+    -h$MYSQL_HOST \
+    -u$MYSQL_USER \
+    -p$MYSQL_PASSWORD \
+    $MYSQL_DATABASE >$SQL_BACKUP_FILE
+}
+
+function import-prod-dump() {
+  load-prod-env
+  mysql \
+    -h $MYSQL_HOST \
+    -u$MYSQL_USER \
+    -p$MYSQL_PASSWORD \
+    $MYSQL_DATABASE <$SQL_BACKUP_FILE
+}
+
+# Push docker images to docker hub
+function docker-push() {
+  docker login
+
+  docker tag tech-blog_nginx webdeveloperpr/tech-blog_nginx:latest
+  docker push webdeveloperpr/tech-blog_nginx:latest
+
+  docker tag tech-blog_frontend webdeveloperpr/tech-blog_frontend:latest
+  docker push webdeveloperpr/tech-blog_frontend:latest
+
+  docker tag tech-blog_backend webdeveloperpr/tech-blog_backend:latest
+  docker push webdeveloperpr/tech-blog_backend:latest
+}
+
+
