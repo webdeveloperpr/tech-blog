@@ -34,5 +34,9 @@
   {
     "ParameterKey": "DBPassword",
     "ParameterValue": "password"
+  },
+  {
+    "ParameterKey": "HostedZoneName",
+    "ParameterValue": "betancourt.tech"
   }
 ]

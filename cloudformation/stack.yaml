@@ -47,6 +47,9 @@ Parameters:
     MaxLength: "41"
     AllowedPattern: "[a-zA-Z0-9]*"
     ConstraintDescription: must contain only alphanumeric characters.
+  HostedZoneName:
+    Description: Name of the hosted zone
+    Type: String
 Mappings:
   RegionMap:
     us-east-1:
@@ -229,6 +232,29 @@ Resources:
       GroupDescription: Security Group for RDS public access
       DBSecurityGroupIngress:
         - CIDRIP: 0.0.0.0/0
+  ## Route53
+  DNS:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      HostedZoneConfig:
+        Comment: !Sub "HostedZone for ${HostedZoneName}"
+      Name: !Ref HostedZoneName
+  DNSRecordGroup:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      Comment: !Sub Creating records for ${HostedZoneName}"
+      HostedZoneId: !Ref DNS
+      RecordSets:
+        - Name: !Sub "${HostedZoneName}."
+          ResourceRecords:
+            - !Ref "EC2IPAddress"
+          TTL: "300"
+          Type: A
+        - Name: !Sub "www.${HostedZoneName}."
+          ResourceRecords:
+            - !Sub "${HostedZoneName}."
+          TTL: "300"
+          Type: CNAME
 Outputs:
   PublicIP:
     Description: The Public IP for the EC2 Instance
