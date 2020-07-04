@@ -86,7 +86,10 @@ function deploy() {
   # stop docker
   docker rm -vf $(docker ps -a -q)
   docker rmi -f $(docker images -a -q)
-
+  
+  # remove dnagling volumes  
+  echo y | docker volume prune
+  
   echo y | docker system prune
 
   docker-compose \
