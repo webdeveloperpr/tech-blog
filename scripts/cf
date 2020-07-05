@@ -70,7 +70,7 @@ function deploy() {
   git clone https://github.com/webdeveloperpr/tech-blog.git
   cd tech-blog
   "
-  
+
   sleep 10
   scp -i $AWS_KEY config/.prod.env admin@$IP:tech-blog/config
 
@@ -87,12 +87,12 @@ function deploy() {
   docker rm -vf $(docker ps -a -q)
   docker rmi -f $(docker images -a -q)
   
-  # remove dnagling volumes  
-  echo y | docker volume prune
-  
+  # remove dangling volumes  
+  echo y | docker volume prune  
   echo y | docker system prune
 
   docker-compose \
+  -d \
   --project-name $PROJECT_NAME \
   -f ./config/docker-compose.base.yaml \
   -f ./config/docker-compose.prod.yaml \
