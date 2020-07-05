@@ -143,23 +143,6 @@ Resources:
           # Add user to docker to prevent having to sudo the Docker commands.  
           sudo usermod -aG docker $USER
 
-          # lower permissions on the docker socket so we $USER can run docker commands
-          sudo chmod 666 /var/run/docker.sock
-
-          # Allow Remote access to Docker by running this daemon.
-          sudo mkdir /etc/systemd/system/docker.service.d
-
-          echo '
-          [Service]
-          ExecStart=
-          ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
-          ' | sudo tee /etc/systemd/system/docker.service.d/docker.conf
-
-          # Reload the daemon so we can connect via port 2375
-          # Make sure port 2375 is open in SG
-          sudo systemctl daemon-reload
-          sudo systemctl restart docker.service
-
           ######################################################################
           # Docker Compose
           # https://docs.docker.com/compose/install/
