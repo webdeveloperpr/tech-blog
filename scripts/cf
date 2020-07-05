@@ -1,43 +1,68 @@
 #!/bin/bash
-STACK_NAME=tech-blog
 AWS_KEY=~/aws-eb.pem
-TEMPLATE_BODY=file://$PWD/cloudformation/stack.yaml
-PARAMETERS=file://$PWD/config/parameters.json
 REGION=us-east-1
-function create_stack() {
-  echo "Creating $STACK_NAME stack"
+PROJECT_NAME=tech-blog
+
+EC2_STACK_NAME=tech-blog-ec2
+EC2_TEMPLATE_BODY=file://$PWD/cloudformation/ec2.yaml
+EC2_TEMPLATE_PARAMETERS=file://$PWD/cloudformation/ec2.json
+
+DB_STACK_NAME=tech-blog-db
+DB_TEMPLATE_BODY=file://$PWD/cloudformation/mysql.yaml
+DB_TEMPLATE_PARAMETERS=file://$PWD/cloudformation/mysql.json
+
+# Create Stack
+function create_ec2_stack() {
   aws cloudformation create-stack \
-    --stack-name $STACK_NAME \
-    --template-body $TEMPLATE_BODY \
-    --parameters $PARAMETERS \
+    --stack-name $EC2_STACK_NAME \
+    --template-body $EC2_TEMPLATE_BODY \
+    --parameters $EC2_TEMPLATE_PARAMETERS \
     --region $REGION
 }
 
-function update_stack() {
-  echo "Updating $STACK_NAME stack"
+function create_db_stack() {
+  aws cloudformation create-stack \
+    --stack-name $DB_STACK_NAME \
+    --template-body $DB_TEMPLATE_BODY \
+    --parameters $DB_TEMPLATE_PARAMETERS \
+    --region $REGION
+}
+
+# Update Stack
+function update_ec2_stack() {
+  echo "Updating $EC2_STACK_NAME stack"
   aws cloudformation update-stack \
-    --stack-name $STACK_NAME \
-    --template-body $TEMPLATE_BODY \
-    --parameters $PARAMETERS \
+    --stack-name $EC2_STACK_NAME \
+    --template-body $EC2_TEMPLATE_BODY \
+    --parameters $EC2_TEMPLATE_PARAMETERS \
     --region $REGION
 }
 
-function delete_stack() {
-  echo "Deleting $STACK_NAME stack"
-  aws cloudformation delete-stack \
-    --stack-name $STACK_NAME
+function update_db_stack() {
+  echo "Updating $DB_STACK_NAME stack"
+  aws cloudformation update-stack \
+    --stack-name $DB_STACK_NAME \
+    --template-body $DB_TEMPLATE_BODY \
+    --parameters $DB_TEMPLATE_PARAMETERS \
+    --region $REGION
 }
 
-function describe_stack() {
-  # Describes the stack resources
-  aws cloudformation describe-stack-resources \
-    --stack-name $STACK_NAME
+function delete_ec2_stack() {
+  echo "Deleting $1 stack"
+  aws cloudformation delete-stack \
+    --stack-name $EC2_STACK_NAME
+}
+
+function delete_db_stack() {
+  echo "Deleting $1 stack"
+  aws cloudformation delete-stack \
+    --stack-name $DB_STACK_NAME
 }
 
 function get_ec2_public_ip() {
   local EC2_IP=$(aws cloudformation \
     --region us-east-1 describe-stacks \
-    --stack-name $STACK_NAME \
+    --stack-name $EC2_STACK_NAME \
     --query "Stacks[0].Outputs" |
     jq -r '.[] | select(.OutputKey=="PublicIP") | .OutputValue')
   echo $EC2_IP
@@ -46,7 +71,7 @@ function get_ec2_public_ip() {
 function get_ec2_ip_address() {
   local EC2_IP=$(aws cloudformation \
     --region us-east-1 describe-stacks \
-    --stack-name $STACK_NAME \
+    --stack-name $EC2_STACK_NAME \
     --query "Stacks[0].Outputs" |
     jq -r '.[] | select(.OutputKey=="InstanceIPAddress") | .OutputValue')
   echo $EC2_IP
@@ -99,15 +124,3 @@ function deploy() {
   up
   "
 }
-
-# function deploy() {
-#   local DOCKER_PORT=2375
-#   local PUBLIC_IP=$(get_ec2_ip_address)
-#   local IP_ADDRESS=tcp://$PUBLIC_IP:$DOCKER_PORT
-#   echo $PUBLIC_IP
-#   docker-compose \
-#     -H $IP_ADDRESS \
-#     -f ./config/docker-compose.base.yaml \
-#     -f ./config/docker-compose.prod.yaml \
-#     up
-# }

@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "DBEngineVersion",
+    "ParameterValue": "8.0.19"
+  },
+  {
+    "ParameterKey": "DBName",
+    "ParameterValue": "blog"
+  },
+  {
+    "ParameterKey": "DBInstanceClass",
+    "ParameterValue": "db.t2.micro"
+  },
+  {
+    "ParameterKey": "DBAllocatedStorage",
+    "ParameterValue": "5"
+  }
+]

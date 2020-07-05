@@ -1,4 +1,4 @@
-source ./scripts/cf
 source ./scripts/app
+source ./scripts/cf
 
 "$@"

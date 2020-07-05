@@ -99,7 +99,7 @@ function export-prod-dump() {
     $MYSQL_DATABASE >$SQL_BACKUP_FILE
 }
 
-function import-prod-dump() {
+function import_prod_dump() {
   load-prod-env
   mysql \
     -h $MYSQL_HOST \
